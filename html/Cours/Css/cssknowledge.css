@@ -1,0 +1,90 @@
+/* Sélecteurs de base */
+body {
+    background-color: #f5f5f5;
+    color: #222;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+/* Classes et identifiants */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#main-title {
+    color: #0077cc;
+}
+
+/* Sélecteurs d’attribut */
+a[href] {
+    text-decoration: underline;
+}
+
+/* Propriétés courantes */
+div {
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Mise en page */
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 8px;
+    }
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Pseudo-classes */
+a:hover {
+    color: #005fa3;
+}
+
+input:focus {
+    outline: 2px solid #0077cc;
+}
+
+/* Pseudo-éléments */
+p::first-line {
+    font-weight: bold;
+}
+
+ul li::marker {
+    color: #0077cc;
+}
+
+/* Animation simple */
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fade-in 1s ease-in;
+}

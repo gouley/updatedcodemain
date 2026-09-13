@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cyberpunk Network Monitor V4</title>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+body {
+    background:#0a0a0f;
+    color:#fcee0a;
+    font-family:'Orbitron', monospace;
+    margin:0;
+    overflow-x:hidden;
+}
+
+/* Animated cyber grid */
+body::before {
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    background:
+      linear-gradient(rgba(0,240,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:movegrid 60s linear infinite;
+    z-index:-1;
+}
+
+@keyframes movegrid {
+    0% {background-position:0 0,0 0;}
+    100% {background-position:800px 800px,800px 800px;}
+}
+
+/* Glitch title */
+@keyframes glitch {
+    0% {transform:translate(0px,0px);}
+    20% {transform:translate(-2px,2px);}
+    40% {transform:translate(2px,-2px);}
+    60% {transform:translate(-1px,1px);}
+    80% {transform:translate(1px,-1px);}
+    100% {transform:translate(0px,0px);}
+}
+
+h1 {
+    text-align:center;
+    letter-spacing:5px;
+    color:#fcee0a;
+    text-shadow:0 0 10px #fcee0a,0 0 20px #fcee0a;
+    animation:glitch 1s infinite;
+    margin-top:20px;
+}
+
+/* Container */
+.container {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    padding:20px;
+}
+
+/* Panels */
+.panel {
+    background:#111118;
+    border:1px solid #00f0ff;
+    box-shadow:0 0 15px #00f0ff, inset 0 0 15px rgba(0,240,255,0.2);
+    padding:15px;
+    border-radius:10px;
+    transition:all 0.3s ease-in-out;
+}
+
+.panel:hover {
+    box-shadow:0 0 25px #00f0ff, inset 0 0 25px rgba(0,240,255,0.3);
+}
+
+/* Radar */
+#radar {
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    border:2px solid #00f0ff;
+    margin:auto;
+    position:relative;
+    overflow:hidden;
+    background: radial-gradient(circle at center, rgba(0,240,255,0.05), transparent 70%);
+}
+.scan-line {
+    position:absolute;
+    width:2px;
+    height:175px;
+    background:#00f0ff;
+    left:50%;
+    top:0;
+    transform-origin:bottom;
+    animation:rotate 3s linear infinite;
+    box-shadow:0 0 15px #00f0ff;
+}
+@keyframes rotate {0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* Table */
+table {
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+th {
+    color:#00f0ff;
+    border-bottom:2px solid #00f0ff;
+    padding:8px;
+    text-transform:uppercase;
+}
+td {
+    border-bottom:1px solid rgba(0,240,255,0.3);
+    padding:6px;
+    transition:all 0.2s;
+}
+tr:hover {
+    background: rgba(0,240,255,0.15);
+}
+
+/* Alerts */
+.alert {
+    color:#ff003c;
+    margin:5px;
+    font-size:14px;
+    text-shadow:0 0 5px #ff003c;
+    animation:fadein 1s ease-in-out;
+}
+@keyframes fadein {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+/* Graph */
+#graph svg {
+    background:#0c0c14;
+    border:1px solid #fcee0a;
+}
+circle.pulse {
+    animation:pulse 1.5s infinite alternate;
+}
+@keyframes pulse {
+    0% {r:6;}
+    50% {r:10;}
+    100% {r:6;}
+}
+line.link {
+    stroke:#00f0ff;
+    stroke-width:1.5px;
+    opacity:0.7;
+}
+
+/* Device highlight */
+.circle-local {
+    fill:#fcee0a;
+    stroke:#fcee0a;
+    stroke-width:2px;
+    filter:drop-shadow(0 0 8px #fcee0a);
+}
+.circle-device {
+    fill:#00f0ff;
+    stroke:#00f0ff;
+    stroke-width:1px;
+    filter:drop-shadow(0 0 4px #00f0ff);
+}
+.device-dot {
+    animation: pulse 2s infinite alternate;
+}
+@keyframes pulse {
+    0% {r:3; opacity:0.7;}
+    50% {r:5; opacity:1;}
+    100% {r:3; opacity:0.7;}
+}
+
+/* Particles */
+.particles {
+    position:absolute;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:-1;
+}
+.particle {
+    position:absolute;
+    background:#00f0ff;
+    border-radius:50%;
+    animation: float 10s linear infinite;
+}
+@keyframes float {
+    0% {transform:translateY(100vh) rotate(0deg); opacity:0;}
+    10% {opacity:1;}
+    90% {opacity:1;}
+    100% {transform:translateY(-100px) rotate(360deg); opacity:0;}
+}
+
+/* Status bar */
+.status {
+    position:fixed;
+    top:10px;
+    right:10px;
+    background:#111118;
+    border:1px solid #00f0ff;
+    padding:10px;
+    border-radius:5px;
+    font-size:12px;
+    color:#00f0ff;
+    box-shadow:0 0 10px #00f0ff;
+}
+
+</style>
+</head>
+
+<body>
+<div class="particles" id="particles"></div>
+<div class="status" id="status">SCANNING NETWORK...</div>
+<h1>CYBERPUNK NETWORK MONITOR V4</h1>
+
+<div class="container">
+
+<div class="panel">
+<h3>Radar</h3>
+<div id="radar">
+<div class="scan-line"></div>
+</div>
+<div id="alerts"></div>
+</div>
+
+<div class="panel">
+<h3>Network Graph</h3>
+<div id="graph"></div>
+</div>
+
+</div>
+
+<div class="panel" style="margin:20px">
+<h3>Devices</h3>
+<table id="devices">
+<tr><th>IP</th><th>HOST</th><th>MAC</th><th>VENDOR</th></tr>
+</table>
+</div>
+
+<script>
+const socket = io()
+let local_ip = null
+
+// Create particles
+function createParticles() {
+    const particles = document.getElementById("particles")
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement("div")
+        particle.className = "particle"
+        particle.style.left = Math.random() * 100 + "%"
+        particle.style.width = particle.style.height = Math.random() * 4 + 2 + "px"
+        particle.style.animationDelay = Math.random() * 10 + "s"
+        particles.appendChild(particle)
+    }
+}
+createParticles()
+
+socket.on("local_ip", lip => {
+    local_ip = lip
+    document.getElementById("status").innerText = "LOCAL IP: " + local_ip
+})
+
+socket.on("scan_results", devices => {
+    updateTable(devices)
+    updateRadar(devices)
+    drawGraph(devices)
+    document.getElementById("status").innerText = "DEVICES FOUND: " + devices.length + " | LOCAL IP: " + (local_ip || "UNKNOWN")
+})
+
+socket.on("new_device", devices => {
+    let alertBox = document.getElementById("alerts")
+    devices.forEach(d=>{
+        alertBox.innerHTML += "<div class='alert'>NEW DEVICE → "+d.ip+"</div>"
+    })
+})
+
+function updateTable(devices){
+    let table = document.getElementById("devices")
+    table.innerHTML="<tr><th>IP</th><th>HOST</th><th>MAC</th><th>VENDOR</th></tr>"
+    devices.forEach(d=>{
+        table.innerHTML += "<tr style='" + (d.ip === local_ip ? "box-shadow:0 0 10px #fcee0a" : "") + "'><td>"+d.ip+"</td><td>"+d.hostname+"</td><td>"+d.mac+"</td><td>"+d.vendor+"</td></tr>"
+    })
+}
+
+function updateRadar(devices) {
+    const radar = d3.select("#radar")
+    radar.selectAll(".device-dot").remove()
+    radar.selectAll(".device-dot").data(devices).enter().append("circle")
+        .attr("class", "device-dot")
+        .attr("cx", d => 175 + Math.cos(Math.random() * 2 * Math.PI) * (Math.random() * 120 + 20))
+        .attr("cy", d => 175 + Math.sin(Math.random() * 2 * Math.PI) * (Math.random() * 120 + 20))
+        .attr("r", 4)
+        .attr("fill", d => d.ip === local_ip ? "#fcee0a" : "#00f0ff")
+        .style("filter", d => d.ip === local_ip ? "drop-shadow(0 0 8px #fcee0a)" : "drop-shadow(0 0 4px #00f0ff)")
+}
+
+function drawGraph(devices) {
+    const svg = d3.select("#graph").html("").append("svg").attr("width", 400).attr("height", 300)
+    const nodes = devices.map(d => ({id: d.ip, ...d}))
+    const links = [] // Add links if needed, e.g., connect to gateway
+    const simulation = d3.forceSimulation(nodes)
+        .force("charge", d3.forceManyBody().strength(-200))
+        .force("center", d3.forceCenter(200, 150))
+        .force("link", d3.forceLink(links).id(d => d.id))
+    const link = svg.append("g").selectAll("line").data(links).enter().append("line").attr("class", "link")
+    const node = svg.append("g").selectAll("circle").data(nodes).enter().append("circle")
+        .attr("r", 8)
+        .attr("fill", d => d.ip === local_ip ? "#fcee0a" : "#00f0ff")
+        .attr("class", d => d.ip === local_ip ? "circle-local" : "circle-device")
+        .call(d3.drag()
+            .on("start", (event, d) => {
+                if (!event.active) simulation.alphaTarget(0.3).restart()
+                d.fx = d.x
+                d.fy = d.y
+            })
+            .on("drag", (event, d) => {
+                d.fx = event.x
+                d.fy = event.y
+            })
+            .on("end", (event, d) => {
+                if (!event.active) simulation.alphaTarget(0)
+                d.fx = null
+                d.fy = null
+            }))
+    node.append("title").text(d => `${d.hostname} (${d.ip})`)
+    simulation.on("tick", () => {
+        link.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y)
+        node.attr("cx", d => d.x).attr("cy", d => d.y)
+    })
+}
+</script>
+</body>
+</html>

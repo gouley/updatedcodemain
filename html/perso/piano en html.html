@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Piano HTML AZERTY - Samples</title>
+	<style>
+		body { background: #222; color: #fff; font-family: sans-serif; text-align: center; }
+		.piano { display: flex; flex-wrap: wrap; justify-content: center; margin: 40px 0; }
+		.key { width: 48px; height: 180px; margin: 2px; background: #fff; border: 1px solid #888; border-radius: 6px; box-shadow: 2px 2px 8px #0004; position: relative; cursor: pointer; font-size: 16px; color: #222; display: flex; align-items: flex-end; justify-content: center; }
+		.key.active { background: #ffd700; }
+		.black { width: 32px; height: 110px; background: #222; color: #fff; position: absolute; top: 0; left: 32px; z-index: 2; border-radius: 0 0 6px 6px; }
+		.label { position: absolute; bottom: 8px; left: 0; width: 100%; text-align: center; font-size: 13px; }
+	</style>
+</head>
+<body>
+	<h1>Piano HTML (AZERTY + Shift)</h1>
+	<div class="piano" id="piano"></div>
+	<p>Touches blanches : AZERTYUIOPQSDFGHJKLMWXCVBN<br>Touches noires : Shift + touche correspondante<br>Son synthétisé instantanément (aucun fichier audio nécessaire)</p>
+	<div style="margin:20px auto;max-width:500px;text-align:center;">
+		<input type="text" id="partition" style="width:60%;font-size:18px;padding:6px;" placeholder="Ex: q D G Q d [ad] e">
+		<button id="playSeq" style="font-size:18px;padding:6px 16px;margin-left:8px;">Jouer la partition</button>
+		<label style="margin-left:12px;font-size:16px;">
+			<input type="checkbox" id="shiftMode"> Jouer en mode Shift (notes noires)
+		</label>
+		<label style="margin-left:18px;font-size:16px;">
+			Tempo : <input type="number" id="tempo" min="40" max="300" value="100" style="width:60px;font-size:16px;"> bpm
+		</label>
+		<p style="font-size:14px;color:#aaa;">Utilise les crochets pour les accords (ex: [ad]), espace pour séparer les notes.</p>
+	</div>
+	<script>
+		// Mapping complet AZERTY (blanches/noires)
+		const keyMap = [
+			{key: 'A', note: 'C4'}, {key: 'Z', note: 'D4'}, {key: 'E', note: 'E4'}, {key: 'R', note: 'F4'}, {key: 'T', note: 'G4'}, {key: 'Y', note: 'A4'}, {key: 'U', note: 'B4'},
+			{key: 'I', note: 'C5'}, {key: 'O', note: 'D5'}, {key: 'P', note: 'E5'}, {key: 'Q', note: 'F5'}, {key: 'S', note: 'G5'}, {key: 'D', note: 'A5'}, {key: 'F', note: 'B5'},
+			{key: 'G', note: 'C6'}, {key: 'H', note: 'D6'}, {key: 'J', note: 'E6'}, {key: 'K', note: 'F6'}, {key: 'L', note: 'G6'}, {key: 'M', note: 'A6'},
+			{key: 'W', note: 'B6'}, {key: 'X', note: 'C7'}, {key: 'C', note: 'D7'}, {key: 'V', note: 'E7'}, {key: 'B', note: 'F7'}, {key: 'N', note: 'G7'}
+		];
+		// Notes noires (dièses) associées à chaque touche blanche
+		const blackMap = {
+			'A': 'C#4', 'Z': 'D#4', 'R': 'F#4', 'T': 'G#4', 'Y': 'A#4',
+			'I': 'C#5', 'O': 'D#5', 'Q': 'F#5', 'S': 'G#5', 'D': 'A#5',
+			'G': 'C#6', 'H': 'D#6', 'K': 'F#6', 'L': 'G#6', 'M': 'A#6',
+			'X': 'C#7', 'C': 'D#7', 'B': 'F#7', 'N': 'G#7'
+		};
+
+		// Fréquences des notes
+		const noteFreq = {
+			'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13, 'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00, 'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88,
+			'C5': 523.25, 'C#5': 554.37, 'D5': 587.33, 'D#5': 622.25, 'E5': 659.25, 'F5': 698.46, 'F#5': 739.99, 'G5': 783.99, 'G#5': 830.61, 'A5': 880.00, 'A#5': 932.33, 'B5': 987.77,
+			'C6': 1046.50, 'C#6': 1108.73, 'D6': 1174.66, 'D#6': 1244.51, 'E6': 1318.51, 'F6': 1396.91, 'F#6': 1479.98, 'G6': 1567.98, 'G#6': 1661.22, 'A6': 1760.00, 'A#6': 1864.66, 'B6': 1975.53,
+			'C7': 2093.00, 'C#7': 2217.46, 'D7': 2349.32, 'D#7': 2489.02, 'E7': 2637.02, 'F7': 2793.83, 'F#7': 2959.96, 'G7': 3135.96, 'G#7': 3322.44
+		};
+
+		// Génère les touches
+		const piano = document.getElementById('piano');
+		keyMap.forEach(k => {
+			const keyDiv = document.createElement('div');
+			keyDiv.className = 'key';
+			keyDiv.dataset.note = k.note;
+			keyDiv.dataset.key = k.key;
+			keyDiv.innerHTML = `<span class="label">${k.key}<br>${k.note}</span>`;
+			keyDiv.addEventListener('mousedown', () => playSynth(k.note, keyDiv));
+			keyDiv.addEventListener('mouseup', () => keyDiv.classList.remove('active'));
+			piano.appendChild(keyDiv);
+			// Ajoute la touche noire si elle existe
+			if (blackMap[k.key]) {
+				const blackDiv = document.createElement('div');
+				blackDiv.className = 'key black';
+				blackDiv.dataset.note = blackMap[k.key];
+				blackDiv.dataset.key = k.key + '_sharp';
+				blackDiv.innerHTML = `<span class="label">Shift+${k.key}<br>${blackMap[k.key]}</span>`;
+				blackDiv.addEventListener('mousedown', () => playSynth(blackMap[k.key], blackDiv));
+				blackDiv.addEventListener('mouseup', () => blackDiv.classList.remove('active'));
+				keyDiv.appendChild(blackDiv);
+			}
+		});
+
+		// Synthèse sonore instantanée
+		const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		function playSynth(note, keyDiv) {
+			keyDiv.classList.add('active');
+			const freq = noteFreq[note];
+			if (!freq) return;
+			const osc = audioCtx.createOscillator();
+			const gain = audioCtx.createGain();
+			osc.type = 'triangle';
+			osc.frequency.value = freq;
+			gain.gain.value = 0.18;
+			osc.connect(gain);
+			gain.connect(audioCtx.destination);
+			osc.start();
+			setTimeout(() => {
+				osc.stop();
+				keyDiv.classList.remove('active');
+			}, 320);
+		}
+
+		// Gestion clavier AZERTY + Shift
+		document.addEventListener('keydown', e => {
+			if (e.repeat) return;
+			const key = e.key.toUpperCase();
+			let note = null;
+			let keyDiv = null;
+			if (e.shiftKey && blackMap[key]) {
+				note = blackMap[key];
+				keyDiv = [...piano.children].find(k => k.dataset.key === key);
+				if (keyDiv) keyDiv = keyDiv.querySelector('.black');
+			} else {
+				const mapping = keyMap.find(km => km.key === key);
+				if (mapping) {
+					note = mapping.note;
+					keyDiv = [...piano.children].find(k => k.dataset.key === key);
+				}
+			}
+			if (note && keyDiv) playSynth(note, keyDiv);
+		});
+
+		// Partition automatique
+		function parsePartition(str) {
+			// Retourne un tableau d'objets {notes:[], isChord:true/false}
+			const seq = [];
+			let i = 0;
+			while (i < str.length) {
+				if (str[i] === '[') {
+					let chord = [];
+					i++;
+					while (i < str.length && str[i] !== ']') {
+						if (str[i] !== ' ' && str[i] !== '\n') chord.push(str[i]);
+						i++;
+					}
+					seq.push({notes: chord, isChord: true});
+					i++;
+				} else if (str[i] !== ' ' && str[i] !== '\n') {
+					seq.push({notes: [str[i]], isChord: false});
+					i++;
+				} else {
+					i++;
+				}
+			}
+			return seq;
+		}
+
+		function playPartition(str) {
+			const seq = parsePartition(str);
+			const shiftMode = document.getElementById('shiftMode').checked;
+			const bpm = parseInt(document.getElementById('tempo').value) || 100;
+			// Durée d'une note (ms)
+			const noteDuration = Math.round(60000 / bpm);
+			let idx = 0;
+			function playNext() {
+				if (idx >= seq.length) return;
+				const step = seq[idx];
+				// Pour chaque note ou accord
+				step.notes.forEach(k => {
+					let key = k.toUpperCase();
+					let note = null;
+					let keyDiv = null;
+					// Si majuscule dans partition ou shiftMode, joue la dièse
+					const isMaj = (k === k.toUpperCase() && k !== k.toLowerCase());
+					if ((shiftMode || isMaj) && blackMap[key]) {
+						note = blackMap[key];
+						keyDiv = [...piano.children].find(k => k.dataset.key === key);
+						if (keyDiv) keyDiv = keyDiv.querySelector('.black');
+					} else {
+						const mapping = keyMap.find(km => km.key === key);
+						if (mapping) {
+							note = mapping.note;
+							keyDiv = [...piano.children].find(k => k.dataset.key === key);
+						}
+					}
+					if (note && keyDiv) playSynth(note, keyDiv);
+				});
+				idx++;
+				setTimeout(playNext, step.isChord ? Math.round(noteDuration * 1.25) : noteDuration);
+			}
+			playNext();
+		}
+
+		document.getElementById('playSeq').addEventListener('click', () => {
+			const val = document.getElementById('partition').value;
+			playPartition(val);
+		});
+	</script>
+</body>
+</html>

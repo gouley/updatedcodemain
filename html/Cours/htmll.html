@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Exploitation JSON</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+<!-- Début script JavaScript-->
+<style>
+table.json-table { border-collapse: collapse; margin: 30px auto; min-width: 420px; background: #f8f8f8; }
+table.json-table th, table.json-table td { border: 1px solid #bbb; padding: 8px 14px; text-align: left; }
+table.json-table th { background: #222; color: #fff; }
+table.json-table tr:nth-child(even) { background: #eaeaea; }
+</style>
+<script>
+let cd1 = {
+   "titre": "Stan Getz Finest Hour version 1",
+   "interprete": "STAN GETZ",
+   "genre": "Jazz/blues",
+   "piste": {
+      "titre": "It Never Entered My Mind",
+      "compositeur": "Hart",
+      "duree": "3:51"
+   }
+};
+
+let cd2 = {
+   "titre": "Stan Getz Finest Hour version 2",
+   "interprete": "STAN GETZ",
+   "genre": "Jazz/blues",
+   "piste": [
+      {
+         "titre": "It Never Entered My Mind",
+         "compositeur": [
+            "Hart",
+            "Rodgers"
+         ],
+         "duree": "3:51"
+      },
+      {
+         "titre": "S-h-i-n-e",
+         "compositeur": "Bright like a diamond",
+         "duree": "8:56"
+      }
+   ]
+};
+
+function renderCDTable(cd, containerId) {
+    let html = `<table class='json-table'>`;
+    html += `<tr><th>Titre</th><th>Interprète</th><th>Genre</th><th>Pistes</th></tr>`;
+    html += `<tr>`;
+    html += `<td>${cd.titre}</td>`;
+    html += `<td>${cd.interprete}</td>`;
+    html += `<td>${cd.genre}</td>`;
+    html += `<td>`;
+    if (Array.isArray(cd.piste)) {
+        html += `<table class='json-table' style='margin:0;'>`;
+        html += `<tr><th>Titre</th><th>Compositeur(s)</th><th>Durée</th></tr>`;
+        cd.piste.forEach(p => {
+            html += `<tr>`;
+            html += `<td>${p.titre}</td>`;
+            if (Array.isArray(p.compositeur)) {
+                html += `<td>${p.compositeur.join(', ')}</td>`;
+            } else {
+                html += `<td>${p.compositeur}</td>`;
+            }
+            html += `<td>${p.duree}</td>`;
+            html += `</tr>`;
+        });
+        html += `</table>`;
+    } else {
+        html += `<table class='json-table' style='margin:0;'>`;
+        html += `<tr><th>Titre</th><th>Compositeur(s)</th><th>Durée</th></tr>`;
+        html += `<tr>`;
+        html += `<td>${cd.piste.titre}</td>`;
+        html += `<td>${cd.piste.compositeur}</td>`;
+        html += `<td>${cd.piste.duree}</td>`;
+        html += `</tr>`;
+        html += `</table>`;
+    }
+    html += `</td>`;
+    html += `</tr>`;
+    html += `</table>`;
+    document.getElementById(containerId).innerHTML = html;
+}
+</script>
+
+</script>
+<div id="tableCD1"></div>
+<div id="tableCD2"></div>
+<script>
+renderCDTable(cd1, "tableCD1");
+renderCDTable(cd2, "tableCD2");
+</script>
+</body>
+</html>

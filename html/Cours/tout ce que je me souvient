@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>titre</title>
+</head>
+<body>
+    <p><strong>tout ce dont je me souvient en html pur</strong></p>
+    <br>
+    <form action="recupPost.php">
+<legend id="bleu">bleu</legend>
+<label for="bleu">bleu</label>
+
+
+    </form>
+</body>
+</html>
+                <input type="radio" id="salarié" name="statut">
+                <label for="salarié">salarié</label>
+                <input type="radio" id="autre" name="statut">
+                <label for="autre">autre</label>
+            </fieldset>
+            <fieldset>
+         

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBX lua guide :3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #0066cc;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            color: white;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        section {
+            background: white;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #0066cc;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>RbxLua Basics</h1>
+        <p>A Beginner's Guide to Roblox Lua</p>
+    </header>
+    <nav>
+        <a href="#introduction">Introduction</a>
+        <a href="#variables">Variables</a>
+        <a href="#data-types">Data Types</a>
+        <a href="#functions">Functions</a>
+        <a href="#control-structures">Control Structures</a>
+        <a href="#events">Events</a>
+        <a href="#roblox-api">Roblox API</a>
+    </nav>
+    <main>
+        <section id="introduction">
+            <h2>Introduction to RbxLua</h2>
+            <p>
+                RbxLua is the scripting language used in Roblox. It is based on Lua 5.1, but includes additional features and APIs specific to Roblox.
+                This guide covers the basics of RbxLua, including syntax, variables, functions, and how to interact with the Roblox environment.
+            </p>
+        </section>
+
+        <section id="variables">
+            <h2>Variables</h2>
+            <p>
+                Variables are used to store data. In RbxLua, you declare a variable using the <code>local</code> keyword.
+            </p>
+            <pre>
+-- Declare a variable
+local playerName = "JoeMama"
+local playerHealth = 100
+local isAlive = true
+
+-- Print variables
+print(playerName)
+print(playerHealth)
+print(isAlive)
+            </pre>
+        </section>
+
+        <section id="data-types">
+            <h2>Data Types</h2>
+            <p>
+                RbxLua supports several data types: <code>nil</code>, <code>boolean</code>, <code>number</code>, <code>string</code>, <code>table</code>, <code>function</code>, <code>userdata</code>, and <code>thread</code>.
+            </p>
+            <pre>
+-- Example of data types
+local nothing = nil -- means No value
+local isTrue = true -- boolean
+local score = 1500 -- number
+local greeting = "Welcome to Roblox!" -- string
+local age = 25 -- number
+local name = "Roblox" -- string
+local inventory = {"sword", "shield", "potion"} -- table
+local playerStats = {health = 100, mana = 50} -- table with key-value pairs 
+local if printHello = function() print("Hello!") end -- function
+            </pre>
+        </section>
+
+        <section id="functions">
+            <h2>Functions</h2>
+            <p>
+                Functions are blocks of code that perform a specific task. You can define a function using the <code>function</code> keyword.
+            </p>
+            <pre>
+-- Define a function
+local function addNumbers(a, b)
+    return a + b
+end
+
+-- Call the function
+local result = addNumbers(5, 3)
+print(result) -- Output: 8
+            </pre>
+        </section>
+
+        <section id="control-structures">
+            <h2>Control Structures</h2>
+            <p>
+                Control structures allow you to control the flow of your program. RbxLua includes <code>if</code>, <code>for</code>, <code>while</code>, and <code>repeat</code> statements.
+            </p>
+            <pre>
+-- If statement
+local age = 18
+if age >= 18 then
+    print("You are an adult.")
+else
+    print("You are a minor.")
+end
+
+-- For loop
+for i = 1, 5 do
+    print("Count: " .. i)
+end
+
+-- While loop
+local count = 0
+while count < 5 do
+    print("While count: " .. count)
+    count = count + 1
+end
+            </pre>
+        </section>
+
+        <section id="events">
+            <h2>Events</h2>
+            <p>
+                Events are used to respond to actions in Roblox, such as a player joining or a part being touched.
+            </p>
+            <pre>
+-- Example: Player joins the game
+game.Players.PlayerAdded:Connect(function(player)
+    print(player.Name .. " has joined the game!")
+end)
+
+-- Example: Part is touched
+local part = workspace.Part
+part.Touched:Connect(function(otherPart)
+    print("Part was touched by: " .. otherPart.Name)
+end)
+            </pre>
+        </section>
+
+        <section id="roblox-api">
+            <h2>Roblox API</h2>
+            <p>
+                The Roblox API provides access to game objects, services, and properties. You can manipulate the game world using these APIs.
+            </p>
+            <pre>
+-- Example: Change a part's color
+local part = workspace.Part
+part.BrickColor = BrickColor.new("Bright red")
+
+-- Example: Spawn a new part
+local newPart = Instance.new("Part")
+newPart.Parent = workspace
+newPart.Position = Vector3.new(0, 10, 0)
+            </pre>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 RbxLua Basics Guide. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="leg1"></div>
+    <script>
+        var leg1 = {
+            "categorie": "légume",
+            "variete": "Bintje",
+            "culture": {
+                "min": "100 jours",
+                "max": "120 jours"
+            },
+            "cuisine": ["soupe", "purée", "Frites"],
+            "url": "https://fr.wikipedia.org/wiki/Bintje"
+        }
+
+        let Div;
+        let h2leg;
+        let para;
+        let leg;
+        let min;
+        let max;
+
+        Div = document.getElementById("leg1");
+
+        h2leg = document.createElement("h2");
+
+        h2leg.textContent = "Legumes 1";
+
+        Div.appendChild(h2leg);
+
+
+        para = document.createElement("p");
+
+        leg = document.createTextNode("Variete : ");
+        
+        para.appendChild(leg);
+        
+
+        var lien = document.createElement("a");
+
+        lien.href = leg1.url;
+
+        lien.title = "wikipédia";
+
+        var lienText = document.createTextNode(leg1.variete);
+
+        lien.appendChild(lienText);
+
+        para.appendChild(lien);
+
+        Div.appendChild(para);
+
+
+        para = document.createElement("p");;
+
+        leg = document.createTextNode("la duree de culture entre " + leg1.culture.min + " jours et " + leg1.culture.max + " jours")
+
+        para.appendChild(leg);
+
+        Div.appendChild(para);
+        
+    </script>
+</body>
+
+</html>

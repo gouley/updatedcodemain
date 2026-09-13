@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Première page avec JavaScript</title>
+    </head>
+
+    <body>
+        <div><label for="txtDegre">Température :</label>
+            <input type="text" id="txtDegre" name="Degre" onchange="temperature(document.getElementById('txtDegre').value);">
+        </div>
+        <div>
+            <img src="images/meteo.png" id="MonImage" alt="Météo">
+        </div>
+
+        <script>
+            function temperature(degre) //déclaration de la fonction avec un paramètre pour le degré
+            {
+                let MonImage = document.getElementById("MonImage"); //récupération de l'élément image
+                if (degre >20 )
+                {
+                    MonImage.src = "images/meteo.png";
+                    MonImage.width = "84";
+                    MonImage.height = "84";
+                }
+                else
+                {
+                    MonImage.src = "images/froid.png";
+                    MonImage.width = "84";
+                    MonImage.height = "84";
+                }
+            }
+        </script>
+    </body>
+</html>
+
+

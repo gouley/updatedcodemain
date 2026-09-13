@@ -1,0 +1,1 @@
+n = int(input("Saissez le int de N "))

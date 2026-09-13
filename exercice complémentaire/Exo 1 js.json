@@ -1,0 +1,10 @@
+{
+    "categorie": "légume",
+    "variete": "Bintje",
+    "culrture" :{
+        "min": "100 jours",
+        "max": "120 jours"
+    },
+    "cuisine": ["soupe","purée","Frites"],
+    "url": "https://fr.wikipedia.org/wiki/Bintje"
+}

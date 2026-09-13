@@ -1,0 +1,132 @@
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #222;
+}
+
+form {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 25px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+fieldset {
+    position: relative;
+    padding: 15px 20px;
+    background: #fafafa;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #e27777;
+}
+
+
+.Gris {
+    background: #e9dcdc;
+}
+
+legend {
+    font-weight: bold;
+    color: #303030;
+    padding: 3px 8px;
+}
+
+label {
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+input[type="mail"],
+select,
+textarea {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #afafaf;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.2s;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #c339fe;
+    box-shadow: 0 0 5px rgba(107, 0, 188, 0.4);
+}
+
+textarea {
+    width: 95%;
+    resize: vertical;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 5px;
+}
+
+
+footer {
+    text-align: center;
+}
+
+.Boutton {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#envoyer {
+    background: #28a745;
+    color: white;
+}
+
+#envoyer:hover {
+    background: #218838;
+}
+
+#Annuler {
+    background: #dc3545;
+    color: white;
+}
+
+#Annuler:hover {
+    background: #c82333;
+}
+
+@media (max-width: 700px) {
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="mail"],
+    select {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    textarea {
+        width: 100%;
+    }
+}

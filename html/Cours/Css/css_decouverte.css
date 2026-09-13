@@ -1,0 +1,61 @@
+body {
+	width: 75%;
+    margin-left: 2%;
+    font-family: Arial;
+}
+
+section {
+    font-size: small;
+}
+
+h1 {
+    color: rgb(37, 105, 231);  
+}
+
+h2 {
+    color: steelblue;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 4px;
+}
+#ancre {
+    position : fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
+/* J'avais la flemme */
+
+#ancreGauche {
+    left: 10px;
+    bottom: 10px;
+}
+
+figcaption {
+    font-style: italic;
+    font-size: 90%;
+}
+
+p {
+    text-align: justify;
+    font-size: medium;
+}
+
+.droit {
+	float : right;
+	margin-left : 2%;
+}
+
+img {
+    object-fit: cover;
+}
+
+
+#fond-gris {
+    background-color: rgb(216, 215, 215);
+    width: 70%;
+    
+}
+
+strong {
+     color: steelblue;
+}

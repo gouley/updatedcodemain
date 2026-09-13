@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/css_candidature.css">
+    <title>Formulaire candidature</title>
+</head>
+
+<body>
+    <h1>Dépot de candidature</h1>
+
+    <form method="post">
+        <fieldset>
+            <p class="annonce">
+                <label for="categorie">Catégorie annonce : </label>
+                <select name="categorie" id="categorie" class="select" required>
+                    <option value="Selectionner">---Selectionner---</option>
+                    <option value="Animation">Animation</option>
+                    <option value="Benevolat">Bénévolat</option>
+                    <option value="GardeEnfants">Garde Enfants</option>
+                    <option value="Soutien">Soutien Scolaires</option>
+                    <option value="Stages">Stages</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </p>
+
+            <fieldset>
+                <legend>Identité</legend>
+                <input type="radio" id="madame" name="Genre">
+                <label for="madame">Madame</label>
+                <input type="radio" id="monsieur" name="Genre">
+                <label for="monsieur">Monsieur</label><br><br>
+                <label for="nom">*Nom : </label>
+                <input type="text" pattern="[\p{Lu}]+(?:[' ][\p{Lu}]+)?$" required><br><br>
+                <label for="prenom">*Prenom : </label>
+                <input type="text" pattern="^[\p{Lu}][\p{Ll}]+[-_ ]+[\p{Lu}][\p{Ll}]+" required><br><br>
+                <label for="age">Age : </label>
+                <input type="number" min="18" max="30" id="age"><br><br>
+                <label for="naissance">Date de naissance : </label>
+                <input type="date" id="dateNaissance"><br><br>
+            </fieldset>
+            <fieldset>
+                <legend>Coordonnées</legend>
+                <label for="tel">Téléphone : </label>
+                <input type="tel" pattern="([\d]{2}(?:[ ]{1})?){5}"><br><br>
+                <label for="mail">*Email : </label>
+                <input type="mail" name="Mail" id="mail" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    required><br><br>
+                <label for="Permis">Permis de conduire : </label>
+                <input type="radio" id="oui" name="permis">
+                <label for="oui">oui</label>
+                <input type="radio" id="non" name="permis">
+                <label for="non">non</label>
+            </fieldset>
+            <fieldset>
+                <legend>Statut</legend>
+                <input type="radio" id="etudiant" name="statut">
+                <label for="etudiant">Etudiant</label>
+                <input type="radio" id="demande" name="statut">
+                <label for="demande">Demandeur d'emploi</label>
+                <input type="radio" id="travailleur" name="statut">
+                <label for="travailleur">Travailleur</label>
+            </fieldset>
+            <fieldset>
+                <legend>Diplômes</legend>
+                <label for="niveau">niveau d'étude</label>
+                <select name="niveau" id="niveau">
+                    <option value="Selectionne">---Selectionner---</option>
+                    <option value="CAP">CAP</option>
+                    <option value="BEP">BEP</option>
+                    <option value="BAC">BAC</option>
+                    <option value="BTS">BTS</option>
+                    <option value="Licenses">Licenses</option>
+                    <option value="master">Master</option>
+                    <option value="Doctorat">Doctorat</option>
+                </select><br><br>
+                <label for="Obtenue">Dernier diplômes Obtenu : </label>
+                <input type="text" name="Obtenu" id="Obtenu"><br>
+                <br>
+                <label for="Formations">Autre(s) certificat(s), diplômes</label><br> <br>
+                <input type="checkbox" name="Bafa" id="Bafa">
+                <label for="Bafa">BAFA</label>
+                <input type="checkbox" name="BAPD" id="BAPD">
+                <label for="BAPD">BAPD</label>
+                <input type="checkbox" name="BNSSA" id="BNSSA">
+                <label for="BNSSA">BNSSA</label>
+            </fieldset>
+            <fieldset>
+                <legend><strong>Disponibilités</strong></legend>
+                <input type="checkbox" name="Jounrée" id="Journée">
+                <label for="Jounrée">Journée</label>
+                <input type="checkbox" name="Soirée" id="soirée">
+                <label for="soirée">Soirée</label>
+                <input type="checkbox" name="Weekend" id="Weekend">
+                <label for="Weekend">Weekend</label>
+                <input type="checkbox" name="Pvacanses" id="Pvacanses" checked="yes">
+                <label for="Pvacanses">Petites Vacanses Scolaires</label>
+                <input type="checkbox" name="Gvacanses" id="Gvacanses">
+                <label for="Gvacanses">Grandes Vacanses Scolaires</label><br><br>
+                <input type="checkbox" name="Autre" id="Autre">
+                <label for="Autre">Autre</label><br>
+                <br>
+                <label for="Precisions">à Préciser : </label>
+                <input type="text" name="Precisions" id="Precisions">
+            </fieldset><br>
+
+            <label for="Libre">Texte Libre</label><br>
+            <textarea name="Libre" id="Libre" cols="100" rows="10"
+                placeholder="Saisissez Des informations complaimentaires si nécesssaires"></textarea><br>
+        </fieldset>
+        <br>
+        <footer>
+            <input type="submit" name="envoyer" id="envoyer" class="Boutton">
+            <input type="reset" name="Annuler" id="Annuler" class="Boutton">
+        </footer>
+    </form>
+</body>
+
+<script>
+    document.getElementById("envoyer").addEventListener("click", function (event) {
+        const age = document.getElementById("age").value.trim();
+        const naissance = document.getElementById("dateNaissance").value.trim();
+
+        // Si aucun des deux n'est rempli → empêcher l'envoi
+        if (age === "" && naissance === "") {
+            event.preventDefault();
+            alert("Veuillez renseigner au moins l'âge OU la date de naissance.");
+        }
+    });
+</script>
+</html>

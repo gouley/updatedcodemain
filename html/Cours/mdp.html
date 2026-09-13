@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Générateur de mot de passe</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0a192f 45%, #112b47 45%, #112b47 55%, #0a192f 55%);
+      background-size: 100% 100%; 
+      color: #f1f1f1;
+    }
+    .container {
+      background: #1e2a3a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      max-width: 400px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #cfd8e3;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      background: #2c3e50;
+      color: #f1f1f1;
+    }
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      background: #2c3e50;
+      color: #f1f1f1;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .output {
+      margin-top: 20px;
+      background: #263544;
+      padding: 10px;
+      border-radius: 6px;
+      word-wrap: break-word;
+    }
+    .output label {
+      margin-top: 10px;
+      color: #aabbd0;
+    }
+    #password, #hash, #checkResult {
+      margin-top: 5px;
+      word-break: break-all;
+      color: #ffffff;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .safe {
+      color: #4CAF50;
+    }
+    .warning {
+      color: #FFC107;
+    }
+    .danger {
+      color: #F44336;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Générateur de mot de passe</h2>
+    <label for="length">Longueur :</label>
+    <input type="number" id="length" min="4" max="64" value="12" />
+    <label><input type="checkbox" id="includeUppercase" checked /> Inclure des majuscules</label>
+    <label><input type="checkbox" id="includeNumbers" checked /> Inclure des chiffres</label>
+    <label><input type="checkbox" id="includeSymbols" checked /> Inclure des caractères spéciaux</label>
+    <button onclick="generatePassword()">Générer</button>
+    <label for="passwordCheck" style="margin-top: 20px;">Vérifier un mot de passe :</label>
+    <input type="password" id="passwordCheck" placeholder="Entrez un mot de passe" />
+    <button onclick="checkPassword()">Vérifier</button>
+    <div class="output">
+      <label>Mot de passe :</label>
+      <div id="password"></div>
+      <label>Hash (SHA-256) :</label>
+      <div id="hash"></div>
+      <label>Résultat vérification :</label>
+      <div id="checkResult"></div>
+    </div>
+  </div>
+  <script>
+    function generatePassword() {
+      const length = parseInt(document.getElementById('length').value);
+      const includeUppercase = document.getElementById('includeUppercase').checked;
+      const includeNumbers = document.getElementById('includeNumbers').checked;
+      const includeSymbols = document.getElementById('includeSymbols').checked;
+      const lowercase = "abcdefghijklmnopqrstuvwxyz";
+      const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const numbers = "0123456789";
+      const symbols = "!@#$%^&*()_+[]{}|;:,.<>?";
+      let chars = lowercase;
+      if (includeUppercase) chars += uppercase;
+      if (includeNumbers) chars += numbers;
+      if (includeSymbols) chars += symbols;
+      if (chars.length === 0) {
+        alert("Veuillez sélectionner au moins un type de caractère.");
+        return;
+      }
+      let password = "";
+      for (let i = 0; i < length; i++) {
+        const randIndex = Math.floor(Math.random() * chars.length);
+        password += chars[randIndex];
+      }
+      document.getElementById("password").textContent = password;
+      generateHash(password);
+    }
+
+    async function generateHash(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      document.getElementById("hash").textContent = hashHex;
+    }
+
+    async function checkPassword() {
+      const password = document.getElementById("passwordCheck").value;
+      if (!password) {
+        alert("Veuillez entrer un mot de passe à vérifier.");
+        return;
+      }
+      const resultElement = document.getElementById("checkResult");
+      resultElement.innerHTML = "Vérification en cours...";
+
+      // Vérification ANSSI
+      const ansiiOk = checkANSSI(password);
+      // Vérification Have I Been Pwned
+      const pwned = await checkPwned(password);
+
+      let result = "";
+      if (!ansiiOk) {
+        result += "<span class='danger'>❌ Ce mot de passe ne respecte pas les recommandations de l'ANSSI (12 caractères minimum, majuscules, chiffres, symboles).</span><br/>";
+      } else {
+        result += "<span class='safe'>✅ Ce mot de passe respecte les recommandations de l'ANSSI.</span><br/>";
+      }
+      if (pwned) {
+        result += "<span class='danger'>❌ Ce mot de passe a été compromis (trouvé dans une fuite de données).</span>";
+      } else {
+        result += "<span class='safe'>✅ Ce mot de passe n'a pas été trouvé dans les fuites de données connues.</span>";
+      }
+      resultElement.innerHTML = result;
+    }
+
+    function checkANSSI(password) {
+      // Recommandations ANSSI : 12 caractères minimum, majuscules, chiffres, symboles
+      return password.length >= 12 &&
+             /[A-Z]/.test(password) &&
+             /[0-9]/.test(password) &&
+             /[^A-Za-z0-9]/.test(password);
+    }
+
+    async function checkPwned(password) {
+      const hash = await sha1(password);
+      const prefix = hash.substring(0, 5);
+      const suffix = hash.substring(5);
+      const url = `https://api.pwnedpasswords.com/range/${prefix}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.text();
+        return data.split('\r\n').some(line => line.startsWith(suffix.toUpperCase()));
+      } catch (e) {
+        console.error("Erreur lors de la vérification :", e);
+        return false;
+      }
+    }
+
+    async function sha1(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-1', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+    }
+  </script>
+</body>
+</html>

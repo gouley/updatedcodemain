@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Me</title>
+</head>
+<body>
+    
+<h1>Root Me </h1>
+ <img src="images/rootme.png" alt="Logo de Root Me">
+<h3>Qu’est-ce que Root Me ?</h3>
+<br>
+Root Me, association à but non lucratif créée en mai 2011 à Coublevie, en Isère, a pour objet de promouvoir la diffusion libre du savoir relatif
+ au hacking et à la sécurité de l’information. Se savoir est essentiel, compte tenu de la <a href="">pénurie de talents en cybersécurité</a> . Root, littéralement 
+ « racine » en anglais, désigne le nom de l’utilisateur d’un système informatique qui possède toutes les permissions. Et c’est tout l’objet des 
+ « challenges » proposés par Root Me sur sa plateforme. Ces challenges ou défis consistent à trouver un « flag » ou un « mot de passe de validation », 
+ prouvant que la personne a bien réussi le hack. <br><br>
+
+
+<h3>Quelques chiffres ?</h3>
+<table cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Root Me : les chiffres</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Âge</td>
+            <td>13 ans, déjà !</td>
+        </tr>
+        <tr>
+            <td>Challenges</td>
+            <td>558</td>
+        </tr>
+        <tr>
+            <td>Solutions</td>
+            <td>5647</td>
+        </tr>
+        <tr>
+            <td>Environnements virtuels</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<br>
+        <h3 style="margin-top:0;">Rejoignez-nous...</h3>
+
+<div style="border:1px solid #ddd; border-radius:6px; padding:16px; max-width:350px; margin:20px 0; background:#fff;">
+    <form>
+        <label for="email">Email :</label><br>
+        <input type="email" id="email" name="email" required style="width:100%; margin-bottom:10px;" placeholder="Votre adresse mail"><br>
+
+        <label for="password">Mot de passe :</label><br>
+        <input type="password" id="password" name="password" minlength="10" maxlength="30" required style="width:100%; margin-bottom:6px;" placeholder="Votre mot de passe"><br>
+        <small>
+            10 à 30 caractères, commence par 1 chiffre puis 2 lettres minuscules.
+        </small>
+        <br><br>
+
+        <label for="category">Catégorie d'utilisateur :</label><br>
+        <select id="category" name="category" style="width:100%; margin-bottom:10px;">
+            <option>Cybersécurité</option>
+            <option>Informatique</option>
+            <option>Enseignant</option>
+            <option>Etudiant</option>
+        </select>
+
+        <label>Intérêt :</label><br>
+        <input type="radio" id="hacking" name="interests" value="Hacking" required>
+        <label for="hacking">Hacking</label><br>
+        <input type="radio" id="social" name="interests" value="Ingénierie sociale">
+        <label for="social">Social</label><br>
+        <input type="radio" id="privacy" name="interests" value="Confidentialité">
+        <label for="privacy">Confidentialité</label><br>
+        <input type="radio" id="software" name="interests" value="Logiciel">
+        <label for="software">Logiciel</label><br>
+        <input type="radio" id="network" name="interests" value="Réseau">
+        <label for="network">Réseau</label><br>
+        <br><br>
+
+        <button type="submit" style="width:20%;">Valider</button>
+    </form>
+</div>
+
+</body>
+</html>
