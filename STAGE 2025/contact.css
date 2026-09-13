@@ -1,0 +1,48 @@
+.navbar{
+    max-width:1300px;
+    margin:auto;
+
+    padding:18px 25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-box {
+      width: 50px;
+      height: 50px;
+      background: #e5c98f;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 24px;
+      color: #4d3d26;
+    }
+
+    .logo h1 {
+      font-size: 22px;
+    }
+
+   nav{
+    display:flex;
+    gap:30px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#3b3022;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#b88b3c;
+}

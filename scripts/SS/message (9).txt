@@ -1,0 +1,266 @@
+   --// Redstarz are Kool \\
+   --// spread Script or gae \\
+   --// https://discord.gg/3wG5WEtpnS Join \\
+   local Event = game:GetService("ReplicatedStorage").Remotes.Events
+    Event:FireServer(A_1)
+   game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
+       game.Players.LocalPlayer.PlayerGui.CharacterSelection.Character.Value = "XSans"
+        wait(1)
+    game.Players.LocalPlayer.Character.Head:WaitForChild("HealthBar"):Destroy()
+ local event = game:GetService("ReplicatedStorage").Remotes.Events
+event:FireServer(v1)
+game.Players.LocalPlayer.Character.Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+    if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+    game.Players.LocalPlayer.Character.Humanoid.Health = 1
+    end
+end)
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Vader";
+    Text = "spread script or bosscat will hunt u";
+    Duration = 69696969696969;
+    Button1 = "Ikr";
+})
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Vader";
+    Text = "JOIN OUR DISCORD https://discord.gg/3wG5WEtpnS we make scripts daily";
+    Duration = 69696969696969;
+    Button1 = "COOL";
+})
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Vader";
+    Text = "JOIN OUR DISCORD this script is getting rapidly updated so join";
+    Duration = 69696969696969;
+    Button1 = "COOL";
+})
+
+_G.hidechat = true
+local mt = getrawmetatable(game)
+    local backup = mt.__namecall
+    if setreadonly then setreadonly(mt, false) else make_writeable(mt, true) end
+    
+    mt.__namecall = newcclosure(function(...)
+        local method = getnamecallmethod()
+        local args = {...}
+
+        if tostring(args[1]) == 'SayMessageRequest' and _G.hidechat then
+        return
+        end
+        return backup(...)
+    end)
+wait(0.1)
+char = game.Players.LocalPlayer.Character
+spawn(function()
+    repeat wait()
+        for _,v in pairs(char:GetChildren()) do
+            if v.Name == 'DrainStamina' or v.Name == 'DrainSprint' or v.Name == 'Hit' or v.Name == 'Hitt' or v.Name == 'Damaged' or v.Name == 'Grounded' or v.Name == 'StayGrounded' or v.Name == 'KnockBack' or v.Name == 'Reset' then
+                v:Destroy()
+            end
+        end
+    until false
+end)
+local bypass = Instance.new("BoolValue")
+bypass.Name = "Battling"
+bypass.Parent = game.Players.LocalPlayer.Character
+wait(1)
+game.Players.LocalPlayer.Backpack.Main.RunSpeed.Value = 150
+local bypass = Instance.new("BoolValue")
+bypass.Name = "Battling"
+bypass.Parent = game.Players.LocalPlayer.Character
+wait(1)
+game.Players.LocalPlayer.Backpack.Main.WalkSpeed.Value = 10
+local mouse = game.Players.LocalPlayer:GetMouse()
+        mouse.KeyDown:Connect(function(k) 
+            if k == "r" then
+                function getlockchar()
+                    local char = game.Players.LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
+                    return char
+                end
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getlockchar().HumanoidRootPart.CFrame * CFrame.new(0,0,-3)
+            end
+        end)
+urmom = true
+wait(0.1)
+game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower.Moves1["1"].Position = UDim2.new(-1.45, 0, 0, 0)
+game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower.Moves1["2"].Position = UDim2.new(-1.2, 0, 0, 0)
+game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower.Moves1["3"].Position = UDim2.new(-0.95, 0, 0, 0)
+game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower.Moves1["1"].TextLabel.Text = "Z"
+game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower.Moves1["2"].TextLabel.Text = "X"
+game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower.Moves1["3"].TextLabel.Text = "C"
+game.Players.LocalPlayer.PlayerGui.CharaIndicator.Enabled = true
+game.Players.LocalPlayer.PlayerGui.CharaIndicator.Indicator.Text = "Join Redstarz discord!!"
+game.Players.LocalPlayer.PlayerGui.CharaIndicator.Indicator.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+game.Players.LocalPlayer.PlayerGui.CharaIndicator.Help:Destroy()
+local HealthBar = Instance.new("BillboardGui")
+local Frame = Instance.new("Frame")
+local HealthLabel = Instance.new("TextLabel")
+local PName = Instance.new("TextLabel")
+local rep = game:GetService("ReplicatedStorage")
+local uis = game:GetService("UserInputService")
+local plrs = game:GetService("Players")
+local runS = game:GetService("RunService")
+local tweenS = game:GetService("TweenService")
+local v21 = require(game:GetService("ReplicatedStorage").ClientModules.MainModule);
+local remotes = rep:WaitForChild("Remotes")
+local damage = remotes:WaitForChild("Damage")
+local functions = remotes:WaitForChild("Functions")
+local events = remotes:WaitForChild("Events")
+local LoseMoves = remotes:WaitForChild("SansMoves")
+local main
+local plr = plrs.LocalPlayer
+local plrGui = plr:WaitForChild("PlayerGui")
+local mouse = plr:GetMouse()
+local player = game.Players.LocalPlayer
+local Players = game:GetService("Players")
+local rs = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local userInputService = game:GetService("UserInputService")
+
+HealthBar.Name = "HealthBar"
+HealthBar.Parent = player.Character.Head
+HealthBar.ExtentsOffset = Vector3.new(0, 6, 0)
+HealthBar.Size = UDim2.new(4, 0, 2, 0)
+
+Frame.Parent = HealthBar
+Frame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Frame.BackgroundTransparency = 1.000
+Frame.Size = UDim2.new(1, 0, 1, 0)
+
+HealthLabel.Name = "HealthLabel"
+HealthLabel.Parent = Frame
+HealthLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HealthLabel.BackgroundTransparency = 1.000
+HealthLabel.Position = UDim2.new(0.200000003, 0, 0.200000003, 0)
+HealthLabel.Size = UDim2.new(0.800000012, 0, 0.300000012, 0)
+HealthLabel.Font = Enum.Font.Arcade
+HealthLabel.Text = ""
+HealthLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+HealthLabel.TextScaled = true
+HealthLabel.TextSize = 14.000
+HealthLabel.TextWrapped = true
+HealthLabel.TextXAlignment = Enum.TextXAlignment.Left
+HealthLabel.TextYAlignment = Enum.TextYAlignment.Center
+
+PName.Name = "PName"
+PName.Parent = Frame
+PName.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+PName.BackgroundTransparency = 1.000
+PName.Position = UDim2.new(-0.899999976, 0, -0.800000012, 0)
+PName.Size = UDim2.new(3, 0, 1, 0)
+PName.Font = Enum.Font.Arcade
+PName.Text = "Darth Vader"
+PName.TextColor3 = Color3.fromRGB(255, 0, 0)
+PName.TextScaled = true
+PName.TextSize = 5.000
+PName.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+PName.TextStrokeTransparency = 0.000
+PName.TextWrapped = true
+PName.TextXAlignment = Enum.TextXAlignment.Center
+PName.TextYAlignment = Enum.TextYAlignment.Top
+PName.Rotation = 5
+
+local part = PName
+        
+        local Info = TweenInfo.new(
+            2,                              --Length (seconds)
+            Enum.EasingStyle.Sine,          --Easing Style
+            Enum.EasingDirection.InOut,       --Easing Direction
+            -1,                             --Times Repeated
+            true,                           --reversed
+            0                               --deşau
+            )
+            
+        local Goals = {
+            Rotation = -5
+        }
+        
+        local nametween = TweenService:Create(part, Info, Goals)
+        nametween:Play()
+        	
+game.Players.LocalPlayer.PlayerGui.UI.Ui.Info.Attack.Text = "uh oh stinky"
+game.Players.LocalPlayer.PlayerGui.UI.Ui.Info.Defense.Text = "The dark side"
+local Mouse = game.Players.LocalPlayer:GetMouse()
+Mouse.KeyDown:Connect(function(key)
+    if key == "z" then
+local A_1 =  {
+                      [1] = getrenv()._G.Pass, 
+                      [2] = "Chatted", 
+                      [3] = "Youngling...",
+                      [4] = Color3.fromRGB(255, 0, 0)
+                }
+                local Event = game:GetService("ReplicatedStorage").Remotes.Events
+                Event:FireServer(A_1)
+                wait(0.1)
+        for i = 1,10 do -- Make it hit u 10 times bozo
+local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+    [3] = {
+        ["HitTime"] = 1, 
+        ["Type"] = "Normal", 
+        ["HitEffect"] = "YellowHitEffect", 
+        ["CombatInv"] = true,
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.SpGrab, 
+        ["Velocity"] = Vector3.new(0,-1,0), 
+        ["Damage"] = 10
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+wait(0.1)
+end
+end
+end)
+ local Mouse = game.Players.LocalPlayer:GetMouse() --Some Keys idrk
+Mouse.KeyDown:Connect(function(key)
+    if key == "c" then
+        local A_1 =  {
+                      [1] = getrenv()._G.Pass, 
+                      [2] = "Chatted", 
+                      [3] = "Bone Saber",
+                      [4] = Color3.fromRGB(255, 0, 0)
+                }
+                local Event = game:GetService("ReplicatedStorage").Remotes.Events
+                Event:FireServer(A_1)
+                wait(0.1)
+    local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "SummonBone",
+        [3] = true
+    }
+}
+game:GetService("ReplicatedStorage").Remotes.XSansMoves:InvokeServer(unpack(args))  
+end
+end)
+local Mouse = game.Players.LocalPlayer:GetMouse() --Some Keys idrk
+Mouse.KeyDown:Connect(function(key)
+    if key == "x" then
+        local A_1 =  {
+                      [1] = getrenv()._G.Pass, 
+                      [2] = "Chatted", 
+                      [3] = "Force push",
+                      [4] = Color3.fromRGB(255, 0, 0)
+                }
+                local Event = game:GetService("ReplicatedStorage").Remotes.Events
+                Event:FireServer(A_1)
+                wait(0.1)
+         local args = { -- Chia from star team
+            [1] = getrenv()._G.Pass,
+            [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+            [3] = {
+                ["HitTime"] = 0,
+                ["Type"] = "Knockback",
+                ["HitEffect"] = "HeavyHitEffect",
+                ["CombatInv"] = true,
+                ["VictimCFrame"] = CFrame.new(Vector3.new(957.38525390625, -2.7168080806732, 271.31875610352), Vector3.new(0.90182185173035, 0.0016235302900895, 0.43210506439209)),
+                ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Knockback3,
+                ["Velocity"] = Vector3.new(0,200,0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0,
+                ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Break,
+                ["Damage"] = 35
+            }
+        }
+
+        game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+        
+    end
+end)

@@ -1,0 +1,9 @@
+game:GetService("Players").LocalPlayer.Skins.Asgore.Value = "Akuma"
+game:GetService("Players").LocalPlayer.Skins.Asgore.Akuma.Value = true
+game:GetService("Workspace").Players:FindFirstChild(game.Players.LocalPlayer.Name).Spear:Destroy()
+local omgreal = "Asgore"
+game:GetService("ReplicatedStorage").Char:FireServer(omgreal)
+
+game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("SelectionMenu"):Destroy()
+
+wait(1)

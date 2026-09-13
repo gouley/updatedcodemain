@@ -1,0 +1,211 @@
+--Nightmare sans By Nightmare Hackers And Mangustos
+--Efefct by Nightmare  Hackers(Niko Recreated)
+--Cutscrene bt Mangustos
+--custom LMB by Shito
+--To mute theme press [;] change music [p] (NightmareBadtime or BADAPPLE)
+--WHIS SCRIPT DON`T MAKE GAME UNFAIR IT SCRIPT FOR CUSTOM SKIN!!!!!!
+game.Players.LocalPlayer.Character.Data.TimeMulti.Value = 0
+game.Players.LocalPlayer.Character.Head.Display.Frame.TextLabel.TextTransparency = 1
+game.Players.LocalPlayer.Character.Head.Display.Frame.Visible = false
+game.Players:Chat(("Hey,fluffy.\n Nice knife"))
+local animation1 = Instance.new("Animation")
+animation1.AnimationId = "rbxassetid://13735947846"
+local anim1 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(animation1)
+anim1:Play()
+wait(3)
+game.Players:Chat(("Ha. Whatev.\n Waddya want?"))
+wait(3)
+local animation1 = Instance.new("Animation")
+animation1.AnimationId = "rbxassetid://9898013851"
+local anim1 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(animation1)
+anim1:Play()
+game.Players:Chat(("You made a pretty big \n mess out of Snowdin..."))
+wait(4)
+local animation1 = Instance.new("Animation")
+animation1.AnimationId = "rbxassetid://9147267777"
+local anim1 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(animation1)
+anim1:Play()
+local Sound = Instance.new("Sound")
+Sound.Parent = game.Players.LocalPlayer.Character.Head
+Sound.Volume = 25
+Sound.Playing = true
+Sound.Looped = false
+Sound.SoundId = "rbxassetid://357417055"
+Sound.Name = "knifehit"
+Sound.PlaybackSpeed = 1.2
+wait(2)
+game.Players:Chat(("before we fight.\n litsen to me. kiddo.."))
+wait(4)
+game.Players.LocalPlayer.Character.Head.knifehit:Destroy()
+local Sound = Instance.new("Sound")
+Sound.Parent = game.Players.LocalPlayer.Character.Head
+Sound.Volume = 30
+Sound.Playing = true
+Sound.Looped = false
+Sound.SoundId = "rbxassetid://10455113162"
+Sound.Name = "Sound"
+Sound.PlaybackSpeed = 1
+game.Players:Chat(("This is a pacifist timeline. \n We monsters will still be friends \n with a human, giving them \n love.. and LOVE. heheh..."))
+wait(12)
+game.Players.LocalPlayer.Character.Head.Sound:Destroy()
+game.Players:Chat(("Theres`s so much happiness and all.\n So, if you want, I can share a bit of it with ya. "))
+wait(6)
+game.Players:Chat(("WE. CAN. HAVE. A. GREAT. TIME."))
+local animation1 = Instance.new("Animation")
+animation1.AnimationId = "rbxassetid://9898013851"
+local anim1 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(animation1)
+anim1:Play()
+wait(4.5)
+local animation1 = Instance.new("Animation")
+animation1.AnimationId = "rbxassetid://11416220377"
+local anim1 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(animation1)
+anim1:Play()
+local Sound = Instance.new("Sound")
+Sound.Parent = game.Players.LocalPlayer.Character.Head
+Sound.Volume = 30
+Sound.Playing = true
+Sound.Looped = false
+Sound.SoundId = "rbxassetid://11354295779"
+Sound.Name = "Scream"
+Sound.PlaybackSpeed = 1
+wait(1.4)
+game.ReplicatedStorage.Animations.SansUF.Combo1.AnimationId = "rbxassetid://9136046401"
+game.ReplicatedStorage.Animations.SansUF.Combo2.AnimationId = "rbxassetid://11207662874"
+game.ReplicatedStorage.Animations.SansUF.Combo3.AnimationId = "rbxassetid://13224460972"
+game.ReplicatedStorage.Animations.SansUF.Combo4.AnimationId = "rbxassetid://11955846895"
+game.ReplicatedStorage.Animations.SansUF.Combo5.AnimationId = "rbxassetid://9136146883"
+game.ReplicatedStorage.Animations.SansUF.BlockStart.AnimationId = "rbxassetid://13735966159"
+game.ReplicatedStorage.Animations.SansUF.Block.AnimationId = "rbxassetid://9188268737"
+game.Players.LocalPlayer.Character.Head.Display.Frame.TextLabel.TextTransparency = 1
+game.Players.LocalPlayer.Character.Head.Display.Frame.Visible = false
+local Sound = Instance.new("Sound")
+Sound.Parent = game.Players.LocalPlayer.Character.Head
+Sound.Volume = 30
+Sound.Playing = true
+Sound.Looped = false
+Sound.SoundId = "rbxassetid://8067356918"
+Sound.Name = "Boom"
+Sound.PlaybackSpeed = 1
+local animation1 = Instance.new("Animation")
+animation1.AnimationId = "rbxassetid://13333517971"
+local anim1 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(animation1)
+anim1:Play()
+wait(1)
+game:GetObjects("rbxassetid://14396677864")[1].Parent = game.Workspace
+game.Workspace.Cool.UltimateTranForm.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+wait(0.5)
+local animation1 = Instance.new("Animation")
+animation1.AnimationId = "rbxassetid://13333517971"
+local anim1 = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(animation1)
+anim1:Play()
+wait(6.4)
+game.Players.LocalPlayer.Character.HumanoidRootPart.UltimateTranForm:Destroy()
+wait(0.3)
+game.Players:Chat(("Why are you surprised? Aren't you supposed to be God?"))
+--To mute theme press [;] change music [p] 
+game.Players.LocalPlayer.Character.Head.Boom:Destroy()
+game.Players.LocalPlayer.Character.Head.Scream:Destroy()
+game:GetObjects("rbxassetid://9795791474")[1].Parent = game.Workspace
+game.Players.LocalPlayer.Character.Head.Eye:Destroy()
+game.Workspace.Rig.Head.Eye.Parent = game.Players.LocalPlayer.Character.Head
+game.Workspace.Rig.Head.Aura.Parent = game.Players.LocalPlayer.Character.Head
+game.Workspace.Rig.Highlight.Parent = game.Players.LocalPlayer.Character
+
+-- Blaster1
+game.Players.LocalPlayer.Character.SBlaster.Jaws.JawL.Color = Color3.fromRGB(17,17,17)
+game.Players.LocalPlayer.Character.SBlaster.Jaws.JawR.Color = Color3.fromRGB(17,17,17)
+game.Players.LocalPlayer.Character.SBlaster.Head.Color = Color3.fromRGB(17,17,17)
+game.Players.LocalPlayer.Character.SBlaster.Head.Eyes.Color = Color3.fromRGB(0,255,255)
+game.Players.LocalPlayer.Character.SBlaster.Head.Inside.Color = Color3.fromRGB(0,255,255)
+
+-- Blaster2
+game.Players.LocalPlayer.Character.SBlaster2.Jaws.JawL.Color = Color3.fromRGB(17,17,17)
+game.Players.LocalPlayer.Character.SBlaster2.Jaws.JawR.Color = Color3.fromRGB(17,17,17)
+game.Players.LocalPlayer.Character.SBlaster2.Head.Color = Color3.fromRGB(17,17,17)
+game.Players.LocalPlayer.Character.SBlaster2.Head.Eyes.Color = Color3.fromRGB(0,255,255)
+game.Players.LocalPlayer.Character.SBlaster2.Head.Inside.Color = Color3.fromRGB(0,255,255)
+--Theme
+local Sound = Instance.new("Sound")
+Sound.Parent = game.Players.LocalPlayer.Character.Head
+Sound.Volume = 3.6
+Sound.Playing = true
+Sound.Looped = true
+--you can put your own music in Sound id
+Sound.SoundId = "rbxassetid://11893116465"
+Sound.Name = "Sus"
+Sound.PlaybackSpeed = 1
+local phase = Instance.new('NumberValue')
+phase.Parent = game.Players.LocalPlayer.Character
+phase.Value = 0
+phase.Name = 'weapon'
+local WeaponValue = game.Players.LocalPlayer.Character.weapon
+game.Players.LocalPlayer.Character.Head.Display.Frame.Visible = true
+game.Players.LocalPlayer.Character.Data.TimeMulti.Value = 1.1
+--change sound code
+local mouse = game.Players.LocalPlayer:GetMouse()
+mouse.KeyDown:Connect(function(k) 
+if k == "p" then
+	if WeaponValue.Value == 0 then
+        game.Players.LocalPlayer.Character.Head.Sus.SoundId = "rbxassetid://11893116465"
+		WeaponValue.Value = 1
+	elseif WeaponValue.Value == 1 then
+        game.Players.LocalPlayer.Character.Head.Sus.SoundId = "rbxassetid://11883527694"
+		WeaponValue.Value = 0
+		
+    end 
+end
+end)
+--mute sound code
+local phase = Instance.new('NumberValue')
+phase.Parent = game.Players.LocalPlayer.Character
+phase.Value = 0
+phase.Name = 'weapon'
+local WeaponValue = game.Players.LocalPlayer.Character.weapon
+ local mouse = game.Players.LocalPlayer:GetMouse()
+mouse.KeyDown:Connect(function(k) 
+if k == ";" then
+	if WeaponValue.Value == 0 then
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 0.5
+wait(0.2)
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 1
+wait(0.2)
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 2
+wait(0.2)
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 3
+		WeaponValue.Value = 1
+	elseif WeaponValue.Value == 1 then
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 3.5
+wait(0.2)
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 3
+wait(0.2)
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 2
+wait(0.2)
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 1
+wait(0.2)
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 0.5
+wait(0.2)
+local Sound = game.Players.LocalPlayer.Character.Head.Sus
+Sound.Volume = 0
+		WeaponValue.Value = 0
+		
+    end 
+end
+end)
+--custom block
+local mouse = game.Players.LocalPlayer:GetMouse()
+mouse.KeyDown:Connect(function(k) 
+	if k == "f" then
+wait(0.19)
+game.Players.LocalPlayer.Character.Block.Head.Color = Color3.fromRGB(0, 0, 0)
+game.Players.LocalPlayer.Character.Block.Head.Inside.Color = Color3.fromRGB(0, 255, 229)
+	end
+end)

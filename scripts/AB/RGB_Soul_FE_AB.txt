@@ -1,0 +1,5 @@
+game.Players.LocalPlayer.Char.Value = "Marisa"
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+-- Reason
+-- You Need Using Script Only1
+-- Using Success Is Reset You Pls Using Your Character You Using Script Again

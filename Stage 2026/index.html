@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Palais Fruitier — Accueil</title>
+  <link rel="stylesheet" href="global.css">
+</head>
+<body>
+
+  <header>
+    <div class="navbar">
+      <a href="index.html" class="logo">
+        <img src="./img/logo.jpeg" alt="Logo Le Palais Fruitier">
+        <h1>Le Palais Fruitier</h1>
+      </a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="presentation.html">Présentation</a>
+        <a href="marques.html">Marques</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-accueil">
+    <div class="centered-container">
+      <img src="./img/6c50f16b-3560-4591-9b04-b7677585985e.png" alt="Logo du site" class="main-logo">
+      <h1 class="welcome-title">Bienvenue sur le site du Palais Fruitier</h1>
+      <p class="welcome-text">Nous sommes ravis de vous accueillir !</p>
+    </div>
+  </section>
+
+  <section class="carousel-section">
+    <h2 class="carousel-title">Nos corbeilles </h2>
+    <div class="carousel">
+      <div class="slides" id="slides">
+        <img src="./img/panier1.jpg" alt="premier panier">
+        <img src="./img/panier2.jpg" alt="Lou Cocal">
+        <img src="./img/panier3.jpg" alt="Moment d'Audace">
+        <img src="./img/panier4.jpg" alt="Produits">
+        <img src="./img/panier5.jpg" alt="Montauzer">
+        <img src="./img/panier6.jpg" alt="Le Palais Fruitier">
+      </div>
+       <button class="carousel-btn prev" onclick="changeSlide(-1)"><span>❮</span></button>
+          <button class="carousel-btn next" onclick="changeSlide(1)"><span>❯</span></button>
+      <div class="dots" id="dots"></div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Le Palais Fruitier — Tous droits réservés.
+  </footer>
+
+  <script>
+    const slides = document.getElementById('slides');
+    const dotsContainer = document.getElementById('dots');
+    const total = slides.children.length;
+    let current = 0;
+    let autoTimer;
+
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    function goTo(index) {
+      current = (index + total) % total;
+      slides.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function changeSlide(dir) {
+      resetAuto();
+      goTo(current + dir);
+    }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), 4000);
+    }
+
+    resetAuto();
+  </script>
+
+</body>
+</html>

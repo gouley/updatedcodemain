@@ -1,0 +1,712 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fffaf0;
+  color: #3b3022;
+  line-height: 1.7;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(244, 223, 180, 0.93);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+}
+
+.navbar {
+  max-width: 1300px;
+  margin: auto;
+  padding: 18px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.logo h1 {
+  font-size: 24px;
+  color: #3b3022;
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #3b3022;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #b88b3c;
+}
+
+footer {
+  margin-top: 80px;
+  background: #f4dfb4;
+  text-align: center;
+  padding: 30px;
+  color: #5f503c;
+  font-weight: bold;
+}
+
+.btn,
+.brand-button {
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-primary,
+.brand-button {
+  background: #b88b3c;
+  color: white;
+}
+
+.btn-primary:hover,
+.brand-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+.btn-secondary {
+  border: 2px solid #c9b07c;
+  color: #3b3022;
+}
+
+.btn-secondary:hover {
+  background: #f7edd7;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 60px;
+  overflow: hidden;
+  border-radius: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  border: 4px solid #f4dfb4;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slides img {
+  width: 100%;
+  flex-shrink: 0;
+  height: 550px;
+  object-fit: cover;
+}
+
+.carousel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.35), transparent);
+  pointer-events: none;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 10;
+  padding: 0;
+}
+
+.carousel-btn:hover {
+  background: rgba(255,255,255,0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+.dots {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.3);
+}
+
+.hero-accueil {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 25px 60px;
+  background:
+    linear-gradient(rgba(244, 223, 180, 0.35), rgba(255, 250, 240, 0.45)),
+    url("./img/52915730-healthy-fruits-background-studio-photo-of-different-fruits-on-wooden-table.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.main-logo {
+  width: 260px;
+  max-width: 80vw;
+  height: auto;
+  margin-bottom: 40px;
+  border-radius: 30px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+.welcome-title {
+  font-size: 2.8rem;
+  color: #b88b3c;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.welcome-text {
+  font-size: 1.4rem;
+  color: #3b3022;
+}
+
+.hero-marques {
+  position: relative;
+  min-height: 60vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("./img/52915730-healthy-fruits-background-studio-photo-of-different-fruits-on-wooden-table.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 140px 25px 80px;
+}
+
+.hero-marques .hero-content {
+  max-width: 900px;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-marques .hero-content p {
+  letter-spacing: 5px;
+  margin-bottom: 20px;
+  color: #f4dfb4;
+  font-weight: bold;
+}
+
+.hero-marques .hero-content h2 {
+  font-size: 60px;
+  margin-bottom: 25px;
+  line-height: 1.1;
+}
+
+.hero-marques .hero-content span {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.9);
+}
+
+.brands-section {
+  padding: 100px 25px;
+}
+
+.brand-card {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid #f0dfba;
+  transition: 0.3s;
+}
+
+.brand-card:hover {
+  transform: translateY(-5px);
+}
+
+.brand-logo {
+  width: 250px;
+  min-width: 250px;
+  height: 250px;
+  background: #fff7e8;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand-content {
+  flex: 1;
+}
+
+.brand-content h2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: #3b3022;
+}
+
+.brand-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #5f503c;
+  margin-bottom: 35px;
+}
+
+.touraine-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #8b5e3c;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.bio-badge {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #4caf50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.hero-presentation {
+  padding-top: 140px;
+  padding-bottom: 80px;
+}
+
+.hero-presentation .hero-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 25px;
+}
+
+.hero-presentation .hero-text h2 {
+  text-align: center;
+  font-size: 52px;
+  margin-bottom: 15px;
+  color: #3b3022;
+}
+
+.hero-presentation .hero-text h3 {
+  text-align: center;
+  color: #b88b3c;
+  font-size: 28px;
+  margin: 30px 0;
+}
+
+.story-card {
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  padding: 60px;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid #f0dfba;
+}
+
+.story-card p {
+  font-size: 18px;
+  color: #5f503c;
+  margin-bottom: 20px;
+}
+
+.story-card strong { color: #b88b3c; }
+.story-card em     { color: #8c6b2d; }
+
+.story-card h3 {
+  text-align: center;
+  margin-top: 40px;
+  color: #b88b3c;
+}
+
+.story-card a {
+  color: #b88b3c;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.story-card a:hover {
+  text-decoration: underline;
+}
+
+.hero-contact {
+  min-height: 45vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 140px 25px 60px;
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("./img/52915730-healthy-fruits-background-studio-photo-of-different-fruits-on-wooden-table.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-contact h2 {
+  font-size: 52px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.hero-contact p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.85);
+}
+
+.contact-section {
+  padding: 80px 25px;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+.map-box,
+.form-box {
+  background: white;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid #f0dfba;
+}
+
+.map-box {
+  min-height: 500px;
+}
+
+.map-box iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border: none;
+  display: block;
+}
+
+.form-box {
+  padding: 50px;
+}
+
+.form-box h3 {
+  font-size: 28px;
+  color: #3b3022;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.double-input {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+input,
+textarea,
+select {
+  padding: 16px;
+  border-radius: 15px;
+  border: 1px solid #e6d2a9;
+  outline: none;
+  font-size: 16px;
+  background: #fffaf0;
+  color: #3b3022;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #b88b3c;
+}
+
+textarea {
+  resize: none;
+  min-height: 160px;
+}
+
+button[type="submit"] {
+  padding: 16px;
+  border: none;
+  border-radius: 15px;
+  background: #b88b3c;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.contact-infos {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  padding: 0 25px;
+}
+
+.info-card {
+  background: white;
+  border-radius: 25px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+  border: 1px solid #f0dfba;
+  transition: 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+}
+
+.info-icon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.info-card h4 {
+  font-size: 16px;
+  color: #b88b3c;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-card p {
+  color: #5f503c;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.info-card a {
+  color: #5f503c;
+  text-decoration: none;
+}
+
+.info-card a:hover {
+  color: #b88b3c;
+  text-decoration: underline;
+}
+
+a.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.logo:hover h1 {
+  color: #b88b3c;
+  transition: color 0.3s;
+}
+
+.carousel-section {
+  padding: 60px 25px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.carousel-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #b88b3c;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .map-box,
+  .map-box iframe {
+    min-height: 350px;
+  }
+
+  .brand-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .brand-logo {
+    width: 180px;
+    min-width: 180px;
+    height: 180px;
+  }
+
+  .hero-marques .hero-content h2 {
+    font-size: 42px;
+  }
+
+  .hero-presentation .hero-text h2 {
+    font-size: 40px;
+  }
+
+  .hero-presentation .hero-text h3 {
+    font-size: 22px;
+  }
+
+  .story-card {
+    padding: 35px;
+  }
+
+  .slides img {
+    height: 400px;
+  }
+
+  .welcome-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  nav {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-presentation {
+    padding-top: 180px;
+  }
+
+  .hero-presentation .hero-text h2 {
+    font-size: 34px;
+  }
+
+  .story-card {
+    padding: 25px;
+  }
+
+  .slides img {
+    height: 250px;
+  }
+
+  .form-box {
+    padding: 25px;
+  }
+
+  .hero-contact h2 {
+    font-size: 36px;
+  }
+}
