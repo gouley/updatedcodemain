@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Palais Fruitier — Contact</title>
+  <link rel="stylesheet" href="global.css">
+</head>
+<body>
+
+  <header>
+    <div class="navbar">
+      <a href="index.html" class="logo">
+        <img src="./img/logo.jpeg" alt="Logo Le Palais Fruitier">
+        <h1>Le Palais Fruitier</h1>
+      </a>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="marques.html">Marques</a>
+        <a href="contact.html">Contact</a>
+        <a href="presentation.html">Présentation</a>
+        <a href="agenda.html">Agenda</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-contact">
+    <div>
+      <h2>Contactez-nous</h2>
+      <p>Une question, une suggestion ? Nous sommes à votre écoute.</p>
+    </div>
+  </section>
+
+  <section class="contact-section" style="padding-bottom: 0;">
+    <div class="contact-infos">
+
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <h4>Adresse</h4>
+        <p>Le Palais Fruitier<br>13 Rue du Cdt. J Y Cousteau <br> 37150 Bléré, France</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">🕐</div>
+        <h4>Horaires</h4>
+        <p>Du mardi au vendredi : <br> 9h-12h30 / 14h30–18h30<br>Samedi : 9h – 18h30</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">📞</div>
+        <h4>Téléphone</h4>
+        <p><a href="tel:+33963249934">09 63 24 99 34</a></p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">✉️</div>
+        <h4>E-mail</h4>
+        <p><a href="mailto:fruitierpalais@gmail.com">fruitierpalais@gmail.com</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="contact-container">
+
+      <div class="map-box">
+        <iframe
+          src="https://maps.google.com/maps?q=13+Rue+du+Commandant+J+Y+Cousteau,+37150+Bl%C3%A9r%C3%A9,+France&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localisation Le Palais Fruitier">
+        </iframe>
+      </div>
+
+      <div class="form-box">
+        <h3>Envoyez-nous un message</h3>
+        <form action="submit_form.php" method="post">
+
+          <div class="double-input">
+            <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+            <input type="text" id="nom" name="nom" placeholder="Nom" required>
+          </div>
+
+          <input type="email" id="email" name="email" placeholder="Adresse e-mail" required>
+          <input type="tel" id="telephone" name="telephone" placeholder="Téléphone (facultatif)">
+
+          <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+
+          <button type="submit">Envoyer le message</button>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Le Palais Fruitier — Tous droits réservés.
+  </footer>
+
+</body>
+</html>
